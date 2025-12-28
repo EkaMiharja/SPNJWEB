@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recent Page</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="recent.css">
+    <!-- Goggle Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="asset/logo.svg">
+
+
+</head>
+<body>
+    <!-- NAVBAR START -->
+    <nav class="nav">
+                <ul class="nav__list">
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link">
+                        <i onclick="navHome()" class="fa-solid fa-house"  style="font-size: 18px;"></i>
+                        <span class="nav__name">Home</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#recent" class="nav__link" style="position: relative;">
+                        <i onclick="navCart()" class="fa-solid fa-receipt" style="font-size: 18px;"></i>
+                        <span class="nav__name">Recent</span>
+                        <span id="cart-notification-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -6px; right: 6px; display: inline-block; font-size: 10px;">
+                        </span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#explore" class="nav__link">
+                        <i onclick="navExplore()" class="fa-solid fa-compass" style="font-size: 18px;"></i>
+                        <span class="nav__name">Explore</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#user" class="nav__link">
+                        <i onclick="navUser()" class="fa-solid fa-user" style="font-size: 18px;"></i>
+                        <span class="nav__name">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- NAVBAR END -->
+            
+    <div class="container my-5">
+        <h4 class="mb-4">Detail Transaksi</h4>
+        <!-- Product List -->
+        <div id="product-list"></div>
+    <!-- Total Harga -->
+        <div class="divider mb-3"></div>
+        <div class="total-price d-flex justify-content-between align-items-center">
+            <h5 class="fw-bold mb-0">Total Harga: Rp. <span id="total-harga">20.000</span></h5>
+            <button id="checkout-btn" class="btn btn-sm my-checkout">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal Pembayaran -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Pilih Jenis Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select" id="paymentMethod">
+                        <option value="" disabled selected>Pilih salah satu</option>
+                        <option value="transfer">Transfer Bank</option>
+                        <option value="cod">Cash on Delivery (COD)</option>
+                        <option value="qris">QRIS</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" id="confirmPaymentBtn" class="btn btn-primary">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JAVASCRIPT RECENT -->
+    <script>
+function navHome() {
+    window.location.href = "dashboard.php";
+}
+function navCart() {
+    window.location.href = "recent.html";
+}
+function navExplore() {
+    window.location.href = "explore.html";
+}
+function navUser() {
+    window.location.href = "user.php";
+}
+function formatRupiah(number) {
+    return number.toLocaleString('id-ID');
+}
+
+// FUNCTION UPDATE PRICES
+function updatePrices() {
+    const productList = document.getElementById('product-list');
+    const badge = document.getElementById('cart-notification-badge'); // Ambil elemen lencana
+    productList.innerHTML = '';
+    
+    let total = 0;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // LOGIKA UNTUK LENCANA NOTIFIKASI
+    if (cart.length > 0) {
+        badge.textContent = cart.length; // Tampilkan jumlah item
+        badge.style.display = 'block';   // Tampilkan lencana
+    } else {
+        badge.style.display = 'none';    // Sembunyikan lencana jika keranjang kosong
+    }
+
+    cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const card = document.createElement('div');
+        card.className = 'product-card mb-3 d-flex align-items-center';
+        card.dataset.unitPrice = item.price;
+
+        card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="product-img me-3 flex-shrink-0" />
+            <div>
+                <strong>${item.name}</strong><br />
+                Rp. <span class="item-total">${formatRupiah(itemTotal)}</span>
+                <div class="mt-2 d-flex align-items-center gap-2">
+                    <button class="btn btn-outline-dark qty-btn plus-btn"><i class="fas fa-plus"></i></button>
+                    <span class="quantity">${item.quantity}</span>
+                    <button class="btn btn-outline-dark qty-btn minus-btn"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+        `;
+        productList.appendChild(card);
+
+        // Event Plus
+        card.querySelector('.plus-btn').addEventListener('click', () => {
+            item.quantity += 1;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updatePrices(); // Memanggil updatePrices akan otomatis memperbarui lencana
+        });
+
+        // Event Minus
+        card.querySelector('.minus-btn').addEventListener('click', () => {
+            if (item.quantity > 1) {
+                item.quantity -= 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+            } else {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            updatePrices(); // Memanggil updatePrices akan otomatis memperbarui lencana
+        });
+    });
+    document.getElementById('total-harga').textContent = formatRupiah(total);
+}
+// Inisialisasi saat halaman dimuat
+updatePrices();
+
+// Buka modal saat klik checkout
+document.getElementById('checkout-btn').addEventListener('click', function () {
+    const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+    modal.show();
+});
+
+// Tombol konfirmasi pada modal
+document.getElementById('confirmPaymentBtn').addEventListener('click', function () {
+    const method = document.getElementById('paymentMethod').value;
+    if (!method) {
+        alert('Silakan pilih metode pembayaran terlebih dahulu!');
+        return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Tambahkan metode pembayaran ke setiap item dalam cart
+    const cartWithMethod = cart.map(item => ({
+        ...item,
+        metode_pembayaran: method
+    }));
+
+    // Ambil data last_order sebelumnya (jika ada)
+    const lastOrderSebelumnya = JSON.parse(localStorage.getItem('last_order')) || [];
+
+    // Gabungkan cart sekarang dengan last_order sebelumnya
+    const updatedLastOrder = [...lastOrderSebelumnya, ...cartWithMethod];
+
+    // Simpan ke localStorage
+    localStorage.setItem('last_order', JSON.stringify(updatedLastOrder));
+
+    // Kosongkan keranjang setelah checkout
+    localStorage.removeItem('cart');
+
+    // Redirect ke halaman pesanan
+    window.location.href = "pesanan.html";
+});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Page</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="explore.css">
+    <!-- Goggle Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="asset/logo.svg">
+
+</head>
+
+<body>
+    <!-- NAVBAR START -->
+    <nav class="nav">
+                <ul class="nav__list">
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link">
+                        <i onclick="navHome()" class="fa-solid fa-house"  style="font-size: 18px;"></i>
+                        <span class="nav__name">Home</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#recent" class="nav__link" style="position: relative;">
+                        <i onclick="navCart()" class="fa-solid fa-receipt" style="font-size: 18px;"></i>
+                        <span class="nav__name">Recent</span>
+                        <span id="cart-notification-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -6px; right: 6px; display: inline-block; font-size: 10px;">
+                        </span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#explore" class="nav__link">
+                        <i onclick="navExplore()" class="fa-solid fa-compass" style="font-size: 18px;"></i>
+                        <span class="nav__name">Explore</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#user" class="nav__link">
+                        <i onclick="navUser()" class="fa-solid fa-user" style="font-size: 18px;"></i>
+                        <span class="nav__name">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- NAVBAR END -->
+
+<div class="container py-4">
+    <!-- Search Bar -->
+    <div class="search-box d-flex align-items-center mb-4">
+        <i class="fas fa-search me-2"></i>
+        <input type="text" placeholder="Ayam Bakar, Nasi Goreng" />
+    </div>
+    <div class="row g-3">
+    <!-- Card 1 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-1.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Nasi Goreng - Kebun Raya </h6>
+                    <p class="text-muted mt-1 ">Khas Indonesia</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>25</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>30 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>10 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 1 END -->
+    <!-- Card 2 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-2.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Seafood - Beji</h6>
+                    <p class="text-muted mt-1 ">Makanan Cepat Saji</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>100</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>10 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>5 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 2 END -->
+    <!-- Card 3 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-3.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Martabak 99 - Bekasi </h6>
+                    <p class="text-muted mt-1 ">Khas Indonesia</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>150</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>20 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>15 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 3 END -->
+    <!-- Card 4 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-4.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Republic Kebab - Tangerang </h6>
+                    <p class="text-muted mt-1 ">Makanan Cepat Saji</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>22</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>30 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>10 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 4 END -->
+    <!-- Card 5 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-5.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Es Kopi Duren - Ciawi </h6>
+                    <p class="text-muted mt-1 ">Minuman</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>200</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>10 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>5.5 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 5 END -->
+    <!-- Card 6 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-6.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">Ikan Bakar - Beji </h6>
+                    <p class="text-muted mt-1 ">Makanan Cepat Saji</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>99</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>10 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>2.5 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 6 END -->
+    <!-- Card 7 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-7.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">XI BOBA - Margonda </h6>
+                    <p class="text-muted mt-1 ">Minuman</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>500</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>5 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>2.5 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 7 END -->
+    <!-- Card 8 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-8.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">MIXUE - Bogor </h6>
+                    <p class="text-muted mt-1 ">Minuman</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>400</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>5 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>3.5 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 8 END -->
+    <!-- Card 9 START -->
+        <div class="col-md-4">
+            <div class="card px-3 py-3 d-flex flex-row align-items-center menu-card">
+                <img src="asset/explore-9.webp" alt="Menu" class="menu-img me-4 w-50 rounded" />
+                <div>
+                    <h6 class="mb-0 fw-bold">ES.TEH - Kebun Raya </h6>
+                    <p class="text-muted mt-1 ">Minuman</p>
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <h6 class="text-muted info-icon"><i class="fas fa-star me-1 icon-hover"></i>500</h6>
+                    <h6 class="text-muted info-icon"><i class="far fa-clock me-1 icon-hover"></i>30 menit</h6>
+                    <h6 class="text-muted info-icon"><i class="fa fa-map-marker-alt me-1 icon-hover"></i>10.2 Kilometer</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- Card 9 END -->
+    </div>
+</div>
+
+<!-- FOOTER START -->
+<footer class="footer">
+    <div class="footer-logo">
+        <img src="asset/logo.png" alt="Logo Grab" />
+    </div>
+
+    <div class="footer-section">
+        <h5>Navigation</h5>
+        <a onclick="navHome()">Home</a>
+        <a onclick="navCart()">Recent</a>
+        <a onclick="navExplore()">Explore</a>
+        <a onclick="navUser()">Account</a>
+    </div>
+
+    <div class="footer-section">
+        <h5>Information</h5>
+        <p>+6289483013993</p>
+        <p>people@gmail.com</p>
+        <p>88, Jl. Cilandak, Jakarta Barat</p>
+        <h5>Follow Us</h5>
+    <div class="social-icons">
+        <a href='https://food.grab.com'><i class="fab fa-instagram"></i></a>
+        <a href='https://web.facebook.com/Grab/'><i class="fab fa-facebook"></i></a>
+        <a href='https://x.com/grabid'><i class="fab fa-twitter"></i></a>
+    </div>
+    </div>
+</footer>
+<!-- FOOTER END -->
+
+
+<!-- Overlay -->
+<div id="modalOverlay" class="position-fixed top-0 start-0 w-100 h-100 bg-dark d-none"></div>
+
+<!-- Modal -->
+<div id="menuModal" class="position-fixed top-50 start-50 translate-middle bg-light rounded p-4 d-none" style="min-width: 300px;">
+    <div id="checkoutAlert" class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3 shadow" role="alert" style="display: none; z-index: 9999;">Item berhasil ditambahkan ke keranjang!
+    </div>
+    <h5 class="fw-bold">Detail Produk</h5>
+    <p>Nama Makanan: <span id="modalName"></span></p>
+    <p>Lokasi: <span id="modalLocation"></span></p>
+    <p>Rating: <span id="modalRating"></span></p>
+    <p>Harga: <span id="modalPrice"></span></p>
+    <button class="btn btn-success w-100" onclick="addToCart('Sate Padang - Depok', 20000, 'asset/menu-8.webp')">Masukkan Keranjang</button>
+    <button class="btn btn-secondary mt-2 w-100 my-checkout" onclick="closeModal()">Tutup</button>
+</div>
+    <!-- JAVASCRIPT EXPLORE -->
+    <script>
+function navHome() {
+    window.location.href = "dashboard.php";
+}
+function navCart() {
+    window.location.href = "recent.html";
+}
+
+function navExplore() {
+    window.location.href = "explore.html";
+}
+
+function navUser() {
+    window.location.href = "user.php";
+}
+
+// =================================
+// FUNGSI LENCANA NOTIFIKASI GLOBAL
+// =================================
+function updateCartBadge() {
+    // Cari elemen lencana di halaman
+    const badge = document.getElementById('cart-notification-badge');
+    
+    // Pastikan elemen lencana ada di halaman saat ini sebelum melanjutkan
+    if (badge) {
+        // Ambil data keranjang dari localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        if (cart.length > 0) {
+            badge.textContent = cart.length; // Tampilkan jumlah item
+            badge.style.display = 'inline-block'; // Tampilkan lencana
+        } else {
+            badge.style.display = 'none'; // Sembunyikan jika keranjang kosong
+        }
+    }
+}
+
+// Ini memastikan lencana selalu dicek setiap kali halaman baru dibuka
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartBadge();
+});
+
+// Ambil elemen-elemen dari DOM
+const menuCards = document.querySelectorAll('.menu-card');
+const modal = document.getElementById('menuModal');
+const overlay = document.getElementById('modalOverlay');
+
+const modalName = document.getElementById('modalName');
+const modalLocation = document.getElementById('modalLocation');
+const modalRating = document.getElementById('modalRating');
+const modalPrice = document.getElementById('modalPrice');
+
+// Data menu Manual
+const menuData = {
+    "Nasi Goreng - Kebun Raya": {
+        lokasi: "Kebun Raya",
+        rating: "3",
+        harga: "Rp 25.000",
+        price: 25000,
+        image: "asset/explore-1.webp"
+    },
+    "Seafood - Beji": {
+        lokasi: "Beji",
+        rating: "100",
+        harga: "Rp 40.000",
+        price: 40000,
+        image: "asset/explore-2.webp"
+    },
+    "Martabak 99 - Bekasi": {
+        lokasi: "Bekasi",
+        rating: "150",
+        harga: "Rp 35.000",
+        price: 35000,
+        image: "asset/explore-3.webp"
+    },
+    "Republic Kebab - Tangerang": {
+        lokasi: "Tangerang",
+        rating: "22",
+        harga: "Rp 40.000",
+        price: 30000,
+        image: "asset/explore-4.webp"
+    },
+    "Es Kopi Duren - Ciawi": {
+        lokasi: "Ciawi",
+        rating: "200",
+        harga: "Rp 35.000",
+        price: 35000,
+        image: "asset/explore-5.webp"
+    },
+    "Ikan Bakar - Beji": {
+        lokasi: "KBeji",
+        rating: "99",
+        harga: "Rp 30.000",
+        price: 30000,
+        image: "asset/explore-6.webp"
+    },
+    "XI BOBA - Margonda": {
+        lokasi: "Margonda",
+        rating: "500",
+        harga: "Rp 20.000",
+        price: 20000,
+        image: "asset/explore-7.webp"
+    },
+    "MIXUE - Bogor": {
+        lokasi: "Bogor",
+        rating: "400",
+        harga: "Rp 25.000",
+        price: 25000,
+        image: "asset/explore-8.webp"
+    },
+    "ES.TEH - Kebun Raya": {
+        lokasi: "Kebun Raya",
+        rating: "500",
+        harga: "Rp 20.000",
+        price: 20000,
+        image: "asset/explore-9.webp"
+    }
+    
+};
+
+// Event klik pada setiap menu card untuk buka modal
+menuCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const name = card.querySelector('h6.fw-bold').textContent.trim();
+        const data = menuData[name];
+
+        if (data) {
+            modalName.textContent = name;
+            modalLocation.textContent = data.lokasi;
+            modalRating.textContent = data.rating;
+            modalPrice.textContent = data.harga;
+
+            document.querySelector('.btn-success').onclick = () => addToCart(name);
+
+            modal.classList.remove('d-none');
+            overlay.classList.remove('d-none');
+
+            // Smooth transition
+            requestAnimationFrame(() => {
+                modal.classList.add('show');
+                overlay.classList.add('show');
+            });
+        }
+    });
+});
+
+// Fungsi untuk menutup modal
+function closeModal() {
+    modal.classList.remove('show');
+    overlay.classList.remove('show');
+
+    // Delay untuk sembunyikan elemen setelah animasi
+    setTimeout(() => {
+        modal.classList.add('d-none');
+        overlay.classList.add('d-none');
+    }, 300);
+}
+
+//Fungsi untuk menambahkan menu ke keranjang
+function addToCart(name) {
+    const data = menuData[name];
+    if (!data) return;
+
+    const item = {
+        name: name,
+        price: data.price,
+        image: data.image,
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+     // Tampilkan alert
+        const alertBox = document.getElementById('checkoutAlert');
+        alertBox.style.display = 'block';
+
+        // Setelah 1.5 detik, redirect
+        setTimeout(() => {
+            window.location.href = 'recent.html';
+        }, 1500);
+}
+    </script>
+</body>
+</html>

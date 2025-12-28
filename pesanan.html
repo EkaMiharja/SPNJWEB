@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesanan Page</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="pesanan.css">
+    <!-- Goggle Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="asset/logo.svg">
+
+</head>
+
+<body>
+    <!-- NAVBAR START -->
+    <nav class="nav">
+                <ul class="nav__list">
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link">
+                        <i onclick="navHome()" class="fa-solid fa-house"  style="font-size: 18px;"></i>
+                        <span class="nav__name">Home</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#recent" class="nav__link" style="position: relative;">
+                        <i onclick="navCart()" class="fa-solid fa-receipt" style="font-size: 18px;"></i>
+                        <span class="nav__name">Recent</span>
+                        <span id="cart-notification-badge" class="badge rounded-pill bg-danger" style="position: absolute; top: -6px; right: 6px; display: inline-block; font-size: 10px;">
+                        </span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#explore" class="nav__link">
+                        <i onclick="navExplore()" class="fa-solid fa-compass" style="font-size: 18px;"></i>
+                        <span class="nav__name">Explore</span>
+                        </a>
+                    </li>
+                <!-- NAVBAR ITEM -->
+                    <li class="nav__item">
+                        <a href="#user" class="nav__link">
+                        <i onclick="navUser()" class="fa-solid fa-user" style="font-size: 18px;"></i>
+                        <span class="nav__name">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- NAVBAR END -->
+
+            <!-- CONTENT -->
+            <div class="container mt-5">
+              <div class="row justify-content-center">
+
+                <!-- Sidebar Profile -->
+                <div class="col-md-4 mb-4">
+                  <div class="profile-card shadow p-4 rounded text-center bg-white">
+                    <img src="asset/profile.jpg" alt="Profile Image" class="rounded-circle mb-3" style="width: 100px; height: 100px; object-fit: cover;">
+                    <h5 class="fw-bold mb-1">Profile</h5>
+                    <p class="mb-1">+628474737292</p>
+                    <p class="text-muted">Jl. Kelapa Dua No. 71,<br>Jakarta Barat</p>
+                    <a href="user.php" class="btn btn-outline-success d-flex align-items-center justify-content-center gap-2 mt-2">
+                      <i class="fa-solid fa-user"></i> Akun Saya
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Status Pemesanan Box -->
+                <div class="col-md-8">
+                  <div class="form-card shadow p-4 rounded bg-white">
+                    <h5 class="fw-bold mb-4">Status Pemesanan</h5>
+
+                    <!-- Step Progress -->
+                    <div class="step-progress d-flex justify-content-between align-items-center position-relative mb-4">
+                      <div class="step text-center" id="step-1">
+                        <div class="step-circle bg-dark text-white"><i class="fa fa-check"></i></div>
+                        <small class="d-block mt-2"> Dimasak</small>
+                      </div>
+                      <div class="step text-center" id="step-2">
+                        <div class="step-circle bg-dark text-white"><i class="fa fa-check"></i></div>
+                        <small class="d-block mt-2">Sedang Diantar</small>
+                      </div>
+                      <div class="step text-center" id="step-3">
+                        <div class="step-circle bg-dark text-white"><i class="fa fa-check"></i></div>
+                        <small class="d-block mt-2">Selesai</small>
+                      </div>
+                    </div>
+
+                <!-- <p><strong>Metode Pembayaran:</strong> <span id="metode-bayar"></span></p> -->
+                <div id="pesanan-terakhir"></div>
+
+                <!-- Pesanan Checkout -->
+                <div class="mt-4" id="checkout-list"></div>   
+                  </div>
+                </div>
+              </div>
+            </div>
+
+<script>
+// Navigasi
+  function navHome() {
+    window.location.href = "dashboard.php";
+  }
+  function navCart() {
+    window.location.href = "recent.html";
+  }
+  function navExplore() {
+    window.location.href = "explore.html";
+  }
+  function navUser() {
+    window.location.href = "user.php";
+  }
+
+// =================================
+// FUNGSI LENCANA NOTIFIKASI GLOBAL
+// =================================
+function updateCartBadge() {
+    // Cari elemen lencana di halaman
+    const badge = document.getElementById('cart-notification-badge');
+    
+    // Pastikan elemen lencana ada di halaman saat ini sebelum melanjutkan
+    if (badge) {
+        // Ambil data keranjang dari localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        if (cart.length > 0) {
+            badge.textContent = cart.length; // Tampilkan jumlah item
+            badge.style.display = 'inline-block'; // Tampilkan lencana
+        } else {
+            badge.style.display = 'none'; // Sembunyikan jika keranjang kosong
+        }
+    }
+}
+
+// Ini memastikan lencana selalu dicek setiap kali halaman baru dibuka
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartBadge();
+});
+
+  // Format angka jadi Rupiah
+  function formatRupiah(number) {
+    return number.toLocaleString('id-ID');
+  }
+
+  // Fungsi untuk animasi step progress
+  function jalankanStepProgress() {
+    const steps = document.querySelectorAll(".step");
+    let current = 0;
+    const interval = setInterval(() => {
+      if (current >= steps.length) {
+        clearInterval(interval);
+        return;
+      }
+
+      const step = steps[current];
+
+      // Lingkaran jadi hijau
+      const circle = step.querySelector(".step-circle");
+      if (circle) {
+        circle.classList.remove("bg-dark");
+        circle.classList.add("bg-success");
+      }
+
+      // Garis antar langkah
+      if (current > 0) {
+        const prevStep = steps[current - 1];
+        const line = document.createElement("div");
+        line.className = "progress-line";
+        line.style.position = "absolute";
+        line.style.top = "20px";
+        line.style.left = "50%";
+        line.style.width = "100%";
+        line.style.height = "4px";
+        line.style.backgroundColor = "#28a745";
+        line.style.zIndex = "1";
+        line.style.transform = "translateX(0%)";
+        prevStep.appendChild(line);
+      }
+
+      current++;
+    }, 2000);
+  }
+
+  // Setelah halaman selesai dimuat
+  document.addEventListener("DOMContentLoaded", function () {
+    // Jalankan animasi step progress langsung
+    jalankanStepProgress();
+
+    // Ambil data dari localStorage
+    const lastOrder = JSON.parse(localStorage.getItem('last_order')) || [];
+    const metode = localStorage.getItem('metode_pembayaran');
+
+    // Tampilkan semua item pesanan
+    const container = document.getElementById('pesanan-terakhir');
+    if (container && lastOrder.length > 0) {
+      lastOrder.forEach((item, index) => {
+        const metodeItem = item.metode_pembayaran || '-';  // Ambil metode pembayaran dari item
+        const metodeText = {
+          transfer: 'Transfer Bank',
+          cod: 'Cash on Delivery (COD)',
+          qris: 'QRIS'
+        };
+        const metodeTampil = metodeText[metodeItem] || metodeItem;
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded mb-3';
+        card.style.backgroundColor = '#4CAF50';
+
+        const btnId = `btn-selesai-${index}`;
+
+        card.innerHTML = `
+          <div class="pesanan-item">
+            <img src="${item.image}" alt="Produk" style="width: 120px; height: 80px; object-fit: cover; border-radius: 10px;" class="me-3">
+            <div class="flex-grow-1">
+              <p style="color: white;" class="mb-1 fw-semibold">${item.name} <span class="badge bg-dark ms-2">${item.quantity}x</span></p>
+              <p style="color: white;" class="mb-1">Rp. ${formatRupiah(item.price * item.quantity)}</p>
+              <p style="color: white;" class="mb-1"><strong>Metode:</strong> ${metodeTampil}</p>
+              <p style="font-weight: bold;" class="mb-0 text-dark">Sudah Terbayar</p>
+            </div>
+            <div class="tombol-aksi">
+              <button style="color: white;" class="btn btn-outline-dark btn-sm">Lacak</button>
+              <button id="${btnId}" class="btn btn-dark btn-sm">Selesai</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+
+        // Event klik tombol selesai
+        document.getElementById(btnId).addEventListener("click", function () {
+          if (confirm("Apakah Anda yakin ingin menyelesaikan pesanan ini?")) {
+            // Ambil data pesanan terakhir dari localStorage
+            const orders = JSON.parse(localStorage.getItem('last_order')) || [];
+
+            // Hapus item berdasarkan index
+            orders.splice(index, 1);
+
+            // Update localStorage
+            localStorage.setItem('last_order', JSON.stringify(orders));
+
+            alert("Pesanan berhasil diselesaikan!");
+            location.reload(); // Refresh halaman untuk menampilkan perubahan
+          }
+        });
+      });
+    }
+  });
+
+</script>
+</body>
+</html>
